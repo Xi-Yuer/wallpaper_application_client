@@ -1,0 +1,10 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "client",
+  "appid": "wxf4e4518c04dcc59a",
+  "setting": {
+    "es6": false,
+    "minified": false
+  },
+  "lazyCodeLoading": "requiredComponents"
+}
