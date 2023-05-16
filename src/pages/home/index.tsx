@@ -1,9 +1,10 @@
-import { View, Text, Image, Block } from '@tarojs/components'
-import { Swiper, Skeleton } from '@taroify/core'
+import { View, Text, Image } from '@tarojs/components'
+import { Swiper } from '@taroify/core'
 import Title from '@/components/title/index'
 import Theme from '@/components/theme/index'
 import TagListPicture from '@/components/tag-list-picture/index'
 import SearchBar from '@/components/search/index'
+import WSkeleton from '@/components/skeleton'
 
 import { useFetch } from './hooks/useFetch'
 
@@ -29,13 +30,16 @@ const HomePage = () => {
               </Swiper.Item>
             ))}
         </Swiper>
-        {!banner.length && (
-          <Swiper>
-            <Swiper.Item className={styles.banner_item}>
-              <Skeleton className={styles.banner} animation='wave' />
-            </Swiper.Item>
-          </Swiper>
-        )}
+        <WSkeleton
+          config={{
+            width: '100vw',
+            height: '300rpx',
+            col: 1,
+            row: 1,
+            gap: 0,
+            loading: !!!banner.length,
+          }}
+        />
       </View>
       {/* 热门专辑 */}
       <Title title='热门专辑' morePagePath='/subpages/album/index' />
@@ -47,20 +51,16 @@ const HomePage = () => {
               <Text className={styles.title}>{_.title}</Text>
             </View>
           ))}
-        {!album.length && (
-          <Block>
-            <Skeleton
-              className={styles.album_images}
-              style={{ height: '180rpx' }}
-              animation='wave'
-            />
-            <Skeleton
-              className={styles.album_images}
-              style={{ height: '180rpx' }}
-              animation='wave'
-            />
-          </Block>
-        )}
+        <WSkeleton
+          config={{
+            width: '45vw',
+            height: '180rpx',
+            col: 2,
+            row: 1,
+            gap: 10,
+            loading: !!!album.length,
+          }}
+        />
       </View>
       <Title title='热门推荐' />
       <TagListPicture tagList={tag} />

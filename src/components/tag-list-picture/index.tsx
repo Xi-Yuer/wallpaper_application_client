@@ -1,7 +1,8 @@
 import { ITag } from '@/service/apis/home'
-import { PullRefresh, Skeleton, Tabs } from '@taroify/core'
+import { PullRefresh, Tabs } from '@taroify/core'
 import { View, Image, Block } from '@tarojs/components'
 import { FC } from 'react'
+import WSkeleton from '../skeleton'
 import { useFetch } from './hooks/useFetch'
 import styles from './index.module.scss'
 
@@ -23,37 +24,32 @@ const TagListPicture: FC<IProps> = ({ tagList = [] }) => {
             ></Tabs.TabPane>
           ))}
       </Tabs>
-      {!tagList.length && (
-        <View className='flex justify-between'>
-          {new Array(10).fill(Math.floor(Math.random())).map((_) => (
-            <Skeleton
-              key={_}
-              style={{
-                width: '45rpx',
-                height: '15rpx',
-              }}
-              animation='wave'
-            />
-          ))}
-        </View>
-      )}
+      <WSkeleton
+        config={{
+          width: '50rpx',
+          height: '10rpx',
+          col: 10,
+          row: 1,
+          gap: 10,
+          loading: !!!tagList.length,
+        }}
+      />
       <PullRefresh loading={loading} onRefresh={onRefresh}>
         <View className={styles.pictures}>
           {pictureList &&
             pictureList.map((_) => (
               <Image src={_.pic} key={_.id} mode='widthFix'></Image>
             ))}
-          {!pictureList.length &&
-            new Array(10).fill(Math.floor(Math.random())).map((_) => (
-              <Skeleton
-                key={_}
-                style={{
-                  height: '580rpx',
-                  width: '48%',
-                  marginBottom: '20rpx',
-                }}
-              />
-            ))}
+          <WSkeleton
+            config={{
+              width: '45vw',
+              height: '380rpx',
+              col: 2,
+              row: 10,
+              gap: 10,
+              loading: !!!pictureList.length,
+            }}
+          />
         </View>
       </PullRefresh>
     </Block>

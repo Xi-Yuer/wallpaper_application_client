@@ -1,11 +1,11 @@
 import { View, Text, Image } from '@tarojs/components'
-import { PullRefresh, Skeleton } from '@taroify/core'
+import { PullRefresh } from '@taroify/core'
 import { useReachBottom } from '@tarojs/taro'
-// import Skeleton from '@taroify/core/swiper'
 import { useEffect, useState } from 'react'
 import { getAlbum, IAlbum } from '@/service/apis/home'
 import Theme from '@/components/theme/index'
 import SearchBar from '@/components/search'
+import WSkeleton from '@/components/skeleton'
 
 import styles from './index.module.scss'
 
@@ -62,16 +62,16 @@ const Album = () => {
                 <Text className={styles.title}>{_.title}</Text>
               </View>
             ))}
-          {!album.length &&
-            new Array(20)
-              .fill(Math.floor(Math.random()))
-              .map((_) => (
-                <Skeleton
-                  key={_}
-                  className={styles.album_images}
-                  style={{ height: '180rpx' }}
-                />
-              ))}
+          <WSkeleton
+            config={{
+              width: '45vw',
+              height: '180rpx',
+              col: 2,
+              row: 10,
+              gap: 20,
+              loading: !!!album.length,
+            }}
+          />
         </View>
       </PullRefresh>
     </View>

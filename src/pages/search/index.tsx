@@ -3,6 +3,7 @@ import { Image, View, Text } from '@tarojs/components'
 import Theme from '@/components/theme'
 import SearchBar from '@/components/search'
 import Title from '@/components/title'
+import WSkeleton from '@/components/skeleton'
 import { getHotCateGory, getHotTag } from '@/service/apis/search'
 import { ITag } from '@/service/apis/home'
 import { Category } from '@/service/apis/picture'
@@ -34,6 +35,16 @@ const SearchPage = () => {
               </View>
             )
           })}
+        <WSkeleton
+          config={{
+            width: '280rpx',
+            height: '150rpx',
+            col: 6,
+            row: 1,
+            gap: 10,
+            loading: !!!hotTag.length,
+          }}
+        />
       </View>
       <Title title='热门分类' showMore={false} />
       <View className={styles.hot_category}>
@@ -46,6 +57,16 @@ const SearchPage = () => {
               </View>
             )
           })}
+        <WSkeleton
+          config={{
+            width: '45vw',
+            height: '150rpx',
+            col: 2,
+            row: 10,
+            gap: 15,
+            loading: !!!hotCateGory.length,
+          }}
+        />
       </View>
     </View>
   )
