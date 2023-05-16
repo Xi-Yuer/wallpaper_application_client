@@ -43,6 +43,17 @@ const TagListPicture: FC<IProps> = ({ tagList = [] }) => {
             pictureList.map((_) => (
               <Image src={_.pic} key={_.id} mode='widthFix'></Image>
             ))}
+          {!pictureList.length &&
+            new Array(10).fill(Math.floor(Math.random())).map((_) => (
+              <Skeleton
+                key={_}
+                style={{
+                  height: '580rpx',
+                  width: '48%',
+                  marginBottom: '20rpx',
+                }}
+              />
+            ))}
         </View>
       </PullRefresh>
     </Block>

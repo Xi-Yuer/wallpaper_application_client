@@ -1,8 +1,54 @@
-import { View } from '@tarojs/components'
-import { memo } from 'react'
+import { useEffect, useState } from 'react'
+import { Image, View, Text } from '@tarojs/components'
+import Theme from '@/components/theme'
+import SearchBar from '@/components/search'
+import Title from '@/components/title'
+import { getHotCateGory, getHotTag } from '@/service/apis/search'
+import { ITag } from '@/service/apis/home'
+import { Category } from '@/service/apis/picture'
 
-const Home = () => {
-  return <View>Search</View>
+import styles from './index.module.scss'
+
+const SearchPage = () => {
+  const [hotTag, setHotTag] = useState<ITag[]>([])
+  const [hotCateGory, setHotCateGory] = useState<Category[]>([])
+  useEffect(() => {
+    getHotTag().then((res) => {
+      setHotTag(res.data)
+    })
+    getHotCateGory().then((res) => {
+      setHotCateGory(res.data)
+    })
+  }, [])
+  return (
+    <View className={styles.search_Wrapper}>
+      <SearchBar />
+      <Title title='热门标签' showMore={false} />
+      <View className={styles.scroll}>
+        {hotTag &&
+          hotTag.map((_) => {
+            return (
+              <View key={_.id} className={styles.scroll_item}>
+                <Image src={_.pic} mode='aspectFill'></Image>
+                <Text className={styles.tag_text}>{_.tagName}</Text>
+              </View>
+            )
+          })}
+      </View>
+      <Title title='热门分类' showMore={false} />
+      <View className={styles.hot_category}>
+        {hotCateGory &&
+          hotCateGory.map((_) => {
+            return (
+              <View key={_.id} className={styles.category_item}>
+                <Image src={_.pic} mode='aspectFill'></Image>
+                <Text className={styles.category_text}>{_.name}</Text>
+              </View>
+            )
+          })}
+      </View>
+    </View>
+  )
 }
 
-export default memo(Home)
+export default Theme(SearchPage)

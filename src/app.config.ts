@@ -5,6 +5,12 @@ export default defineAppConfig({
     'pages/search/index',
     'pages/mine/index',
   ],
+  subPackages: [
+    {
+      root: 'subpages',
+      pages: ['album/index'],
+    },
+  ],
   tabBar: {
     selectedColor: '#ffe048',
     color: '#cdcdcd',

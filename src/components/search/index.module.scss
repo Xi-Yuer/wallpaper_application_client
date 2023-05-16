@@ -1,16 +1,15 @@
 .search_wrapper {
   display: flex;
   align-items: center;
-  background-color: white;
   .share_icon {
     margin-right: 20rpx;
   }
   .search {
     width: 400rpx;
     flex: 3;
-    background-color: #f5f5f5;
+    background-color: #fdeccd;
     border-radius: 30rpx;
-    color: gray;
+    color: rgb(170, 170, 170);
     font-size: 28rpx;
     display: flex;
     padding-left: 50rpx;

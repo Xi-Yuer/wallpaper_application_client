@@ -9,7 +9,7 @@ import { useFetch } from './hooks/useFetch'
 
 import styles from './index.module.scss'
 
-const Home = () => {
+const HomePage = () => {
   const { banner, album, tag } = useFetch()
   return (
     <View className={styles.page_wrapper}>
@@ -38,7 +38,7 @@ const Home = () => {
         )}
       </View>
       {/* 热门专辑 */}
-      <Title title='热门专辑' />
+      <Title title='热门专辑' morePagePath='/subpages/album/index' />
       <View className={styles.album}>
         {album &&
           album.map((_) => (
@@ -49,15 +49,23 @@ const Home = () => {
           ))}
         {!album.length && (
           <Block>
-            <Skeleton className={styles.album_images} animation='wave' />
-            <Skeleton className={styles.album_images} animation='wave' />
+            <Skeleton
+              className={styles.album_images}
+              style={{ height: '180rpx' }}
+              animation='wave'
+            />
+            <Skeleton
+              className={styles.album_images}
+              style={{ height: '180rpx' }}
+              animation='wave'
+            />
           </Block>
         )}
       </View>
-      <Title title='热门标签' />
+      <Title title='热门推荐' />
       <TagListPicture tagList={tag} />
     </View>
   )
 }
 
-export default Theme(Home)
+export default Theme(HomePage)
