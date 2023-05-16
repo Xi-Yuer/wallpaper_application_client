@@ -1,18 +1,21 @@
 import { useReachBottom } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { getTag, ITag } from '@/service/apis/home/index'
 import { getPictrue, IPicture } from '@/service/apis/picture/index'
+import { ITag } from '@/service/apis/home'
 
-export function useFetch() {
-  const [tag, setTag] = useState<ITag[]>([])
+export function useFetch(tagList: ITag[]) {
   const [loading, setLoading] = useState(false)
-
   const [currentPage, setCurrentPage] = useState(1)
   const [currentTag, setCurrentTag] = useState<number>()
 
   const [hasMore, setHasMore] = useState(true)
   const [cache, setCache] = useState({})
   const [pictureList, setPictureList] = useState<IPicture[]>([])
+
+  // 初始化第一个 tag
+  useEffect(() => {
+    setCurrentTag(tagList[0]?.id)
+  }, [tagList])
 
   useEffect(() => {
     if (!currentTag) return
@@ -76,17 +79,7 @@ export function useFetch() {
     setCurrentPage(1)
     setHasMore(true)
   }
-
-  // 页面数据初始化
-  useEffect(() => {
-    Promise.all([getTag({ limit: 10, page: 1 })]).then(([tagResult]) => {
-      setTag(tagResult.data)
-      setCurrentTag(tagResult.data[0].id)
-    })
-  }, [])
-
   return {
-    tag,
     pictureList,
     currentTag,
     loading,

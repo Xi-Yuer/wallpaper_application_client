@@ -1,17 +1,21 @@
+import { ITag } from '@/service/apis/home'
 import { PullRefresh, Skeleton, Tabs } from '@taroify/core'
 import { View, Image, Block } from '@tarojs/components'
-import { memo } from 'react'
+import { FC } from 'react'
 import { useFetch } from './hooks/useFetch'
 import styles from './index.module.scss'
 
-const TagListPicture = memo(() => {
-  const { tag, tabChange, currentTag, loading, pictureList, onRefresh } =
-    useFetch()
+interface IProps {
+  tagList: ITag[]
+}
+const TagListPicture: FC<IProps> = ({ tagList = [] }) => {
+  const { tabChange, currentTag, loading, pictureList, onRefresh } =
+    useFetch(tagList)
   return (
     <Block>
       <Tabs animated swipeable onChange={tabChange} value={currentTag}>
-        {tag &&
-          tag.map((_) => (
+        {tagList &&
+          tagList.map((_) => (
             <Tabs.TabPane
               title={_.tagName}
               key={_.id}
@@ -19,7 +23,7 @@ const TagListPicture = memo(() => {
             ></Tabs.TabPane>
           ))}
       </Tabs>
-      {!tag.length && (
+      {!tagList.length && (
         <View className='flex justify-between'>
           {new Array(10).fill(Math.floor(Math.random())).map((_) => (
             <Skeleton
@@ -43,6 +47,6 @@ const TagListPicture = memo(() => {
       </PullRefresh>
     </Block>
   )
-})
+}
 
 export default TagListPicture

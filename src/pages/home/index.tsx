@@ -1,49 +1,19 @@
-import { CSSProperties, useEffect, useState } from 'react'
-
-import { View, Text, Image, Block, Button } from '@tarojs/components'
+import { View, Text, Image, Block } from '@tarojs/components'
 import { Swiper, Skeleton } from '@taroify/core'
-import { ShareOutlined, Search } from '@taroify/icons'
 import Title from '@/components/title/index'
 import Theme from '@/components/theme/index'
 import TagListPicture from '@/components/tag-list-picture/index'
+import SearchBar from '@/components/search/index'
 
-import { useSystem } from '../../hooks/useSystem'
 import { useFetch } from './hooks/useFetch'
 
 import styles from './index.module.scss'
 
 const Home = () => {
-  const { menuTop, menuHeight } = useSystem()
-  const { banner, album } = useFetch()
-  const [searchStyle, setSearchStyle] = useState<CSSProperties>()
-  // 初始化搜索状态栏
-  useEffect(() => {
-    setSearchStyle({
-      height: menuHeight + menuTop + menuHeight / 2,
-      margin: '0 -2rpx',
-      paddingTop: menuTop,
-      position: 'sticky',
-      top: 0,
-      background: 'white',
-      boxSizing: 'border-box',
-      zIndex: 100,
-    })
-  }, [menuTop, menuHeight])
+  const { banner, album, tag } = useFetch()
   return (
     <View className={styles.page_wrapper}>
-      {/* 搜索 */}
-      <View style={searchStyle}>
-        <View className={styles.search_wrapper}>
-          <Button openType='share'>
-            <ShareOutlined size='20' className={styles.share_icon} />
-          </Button>
-          <View className={styles.search} style={{ height: menuHeight }}>
-            <Search className={styles.search_icon} />
-            <Text>搜索头像</Text>
-          </View>
-          <View style={{ flex: 2 }}></View>
-        </View>
-      </View>
+      <SearchBar />
       {/* 轮播 */}
       <View className={styles.banner}>
         <Swiper autoplay={4000}>
@@ -72,12 +42,10 @@ const Home = () => {
       <View className={styles.album}>
         {album &&
           album.map((_) => (
-            <Image
-              src={_.pic}
-              key={_.id}
-              className={styles.album_images}
-              mode='aspectFill'
-            ></Image>
+            <View key={_.id} className={styles.album_images}>
+              <Image src={_.pic} mode='aspectFill'></Image>
+              <Text className={styles.title}>{_.title}</Text>
+            </View>
           ))}
         {!album.length && (
           <Block>
@@ -87,7 +55,7 @@ const Home = () => {
         )}
       </View>
       <Title title='热门标签' />
-      <TagListPicture />
+      <TagListPicture tagList={tag} />
     </View>
   )
 }
