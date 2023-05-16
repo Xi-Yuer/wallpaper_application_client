@@ -39,14 +39,18 @@ export function useFetch(tagList: ITag[]) {
     if (!hasMore || !currentTag) return
     setCurrentPage(currentPage + 1)
     const lastData = currentTag ? cache[currentTag] : []
-    const res = await getPictrue({ tag: currentTag, page: currentPage + 1 })
-    if (!(res.data.length > 0)) {
+    try {
+      const res = await getPictrue({ tag: currentTag, page: currentPage + 1 })
+      if (!(res.data.length > 0)) {
+        setHasMore(false)
+      } else {
+        setHasMore(true)
+        const mergeData = [...lastData, ...res.data]
+        setCache((preCache) => ({ ...preCache, [currentTag]: mergeData }))
+        setPictureList(mergeData)
+      }
+    } catch (error) {
       setHasMore(false)
-    } else {
-      setHasMore(true)
-      const mergeData = [...lastData, ...res.data]
-      setCache((preCache) => ({ ...preCache, [currentTag]: mergeData }))
-      setPictureList(mergeData)
     }
   })
 
@@ -75,6 +79,7 @@ export function useFetch(tagList: ITag[]) {
   }
   // 切换 tag
   const tabChange = (id: number) => {
+    setPictureList([])
     setCurrentTag(id)
     setCurrentPage(1)
     setHasMore(true)

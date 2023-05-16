@@ -38,13 +38,17 @@ const Album = () => {
   useReachBottom(() => {
     if (!hasMore) return
     setCurrentPage(currentPage + 1)
-    getAlbum({ limit: 20, page: currentPage + 1 }).then((res) => {
-      if (res.data.length) {
-        setAlbum([...album, ...res.data])
-      } else {
+    getAlbum({ limit: 20, page: currentPage + 1 })
+      .then((res) => {
+        if (res.data.length) {
+          setAlbum([...album, ...res.data])
+        } else {
+          setHasMore(false)
+        }
+      })
+      .catch(() => {
         setHasMore(false)
-      }
-    })
+      })
   })
   return (
     <View className={styles.album_wrapper}>

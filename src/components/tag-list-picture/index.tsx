@@ -30,7 +30,7 @@ const TagListPicture: FC<IProps> = ({ tagList = [] }) => {
           height: '10rpx',
           col: 10,
           row: 1,
-          gap: 10,
+          gap: 5,
           loading: !!!tagList.length,
         }}
       />

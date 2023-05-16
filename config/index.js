@@ -42,6 +42,9 @@ const config = {
         },
       },
     },
+    miniCssExtractPluginOption: {
+      ignoreOrder: true,
+    },
   },
   h5: {
     publicPath: '/',
