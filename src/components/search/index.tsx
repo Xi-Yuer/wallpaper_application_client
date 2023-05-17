@@ -28,6 +28,11 @@ const SearchBar: FC<IProps> = memo(({ isBack = false }) => {
   const back = () => {
     Taro.navigateBack()
   }
+  const navToSearchPage = () => {
+    Taro.navigateTo({
+      url: '/subpages/search/index',
+    })
+  }
   return (
     <View style={searchStyle}>
       <View className={styles.search_wrapper}>
@@ -41,7 +46,11 @@ const SearchBar: FC<IProps> = memo(({ isBack = false }) => {
           </Button>
         )}
 
-        <View className={styles.search} style={{ height: menuHeight }}>
+        <View
+          className={styles.search}
+          style={{ height: menuHeight }}
+          onClick={navToSearchPage}
+        >
           <Search className={styles.search_icon} />
           <Text>搜索头像</Text>
         </View>

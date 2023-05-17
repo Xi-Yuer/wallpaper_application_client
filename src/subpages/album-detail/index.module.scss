@@ -1,0 +1,49 @@
+.banner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 300rpx;
+  image {
+    width: 100%;
+    height: 300rpx;
+  }
+  text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 50rpx;
+    color: white;
+  }
+}
+
+.content {
+  padding: 0 20rpx;
+  .description {
+    font-size: 25rpx;
+    color: rgb(88, 88, 88);
+  }
+  .user {
+    margin: 20rpx 0;
+    image {
+      width: 50rpx;
+      height: 50rpx;
+      border-radius: 50%;
+    }
+    text {
+      color: rgb(88, 88, 88);
+      font-size: 25rpx;
+    }
+  }
+  .pictures {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    image {
+      width: 350rpx;
+      border-radius: 10rpx;
+      margin-bottom: 20rpx;
+    }
+  }
+}

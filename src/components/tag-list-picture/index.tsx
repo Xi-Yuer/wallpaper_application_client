@@ -1,5 +1,5 @@
 import { ITag } from '@/service/apis/home'
-import { PullRefresh, Tabs } from '@taroify/core'
+import { PullRefresh, Sticky, Tabs } from '@taroify/core'
 import { View, Image, Block } from '@tarojs/components'
 import { FC } from 'react'
 import WSkeleton from '../skeleton'
@@ -8,22 +8,44 @@ import styles from './index.module.scss'
 
 interface IProps {
   tagList: ITag[]
+  isSticky?: boolean
+  stickTop?: number
 }
-const TagListPicture: FC<IProps> = ({ tagList = [] }) => {
+const TagListPicture: FC<IProps> = ({
+  tagList = [],
+  isSticky = false,
+  stickTop = 0,
+}) => {
   const { tabChange, currentTag, loading, pictureList, onRefresh } =
     useFetch(tagList)
   return (
     <Block>
-      <Tabs animated swipeable onChange={tabChange} value={currentTag}>
-        {tagList &&
-          tagList.map((_) => (
-            <Tabs.TabPane
-              title={_.tagName}
-              key={_.id}
-              value={_.id}
-            ></Tabs.TabPane>
-          ))}
-      </Tabs>
+      {isSticky ? (
+        <Sticky offsetTop={stickTop}>
+          <Tabs animated swipeable onChange={tabChange} value={currentTag}>
+            {tagList &&
+              tagList.map((_) => (
+                <Tabs.TabPane
+                  title={_.tagName}
+                  key={_.id}
+                  value={_.id}
+                ></Tabs.TabPane>
+              ))}
+          </Tabs>
+        </Sticky>
+      ) : (
+        <Tabs animated swipeable onChange={tabChange} value={currentTag}>
+          {tagList &&
+            tagList.map((_) => (
+              <Tabs.TabPane
+                title={_.tagName}
+                key={_.id}
+                value={_.id}
+              ></Tabs.TabPane>
+            ))}
+        </Tabs>
+      )}
+
       <WSkeleton
         config={{
           width: '50rpx',

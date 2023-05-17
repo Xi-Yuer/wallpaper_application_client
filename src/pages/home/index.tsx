@@ -1,5 +1,7 @@
+import Taro from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { Swiper } from '@taroify/core'
+import { useSystem } from '@/hooks/useSystem'
 import Title from '@/components/title/index'
 import Theme from '@/components/theme/index'
 import TagListPicture from '@/components/tag-list-picture/index'
@@ -12,6 +14,20 @@ import styles from './index.module.scss'
 
 const HomePage = () => {
   const { banner, album, tag } = useFetch()
+  const { customHeight } = useSystem()
+  const navToAlbumDetailPage = (id) => {
+    Taro.navigateTo({
+      url: `/subpages/album-detail/index?id=${id}`,
+    })
+  }
+
+  const navToDetailPage = (_) => {
+    if (_.type === 'album') {
+      Taro.navigateTo({
+        url: `/subpages/album-detail/index?id=${_.albumId}`,
+      })
+    }
+  }
   return (
     <View className={styles.page_wrapper}>
       <SearchBar />
@@ -21,7 +37,11 @@ const HomePage = () => {
           <Swiper.Indicator />
           {banner &&
             banner.map((_) => (
-              <Swiper.Item key={_.id} className={styles.banner_item}>
+              <Swiper.Item
+                key={_.id}
+                className={styles.banner_item}
+                onClick={() => navToDetailPage(_)}
+              >
                 <Image
                   src={_.pic}
                   mode='aspectFill'
@@ -46,7 +66,11 @@ const HomePage = () => {
       <View className={styles.album}>
         {album &&
           album.map((_) => (
-            <View key={_.id} className={styles.album_images}>
+            <View
+              key={_.id}
+              className={styles.album_images}
+              onClick={() => navToAlbumDetailPage(_.id)}
+            >
               <Image src={_.pic} mode='aspectFill'></Image>
               <Text className={styles.title}>{_.title}</Text>
             </View>
@@ -62,8 +86,8 @@ const HomePage = () => {
           }}
         />
       </View>
-      <Title title='热门推荐' />
-      <TagListPicture tagList={tag} />
+      <Title title='热门推荐' morePagePath='/subpages/hot-recommends/index' />
+      <TagListPicture tagList={tag} isSticky stickTop={customHeight} />
     </View>
   )
 }

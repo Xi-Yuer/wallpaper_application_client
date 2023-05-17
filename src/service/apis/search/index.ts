@@ -11,7 +11,7 @@ export const getHotTag = (queryTag?: queryTag) => {
     url: '/tags',
     data: {
       limit: queryTag?.limit || 6,
-      page: queryTag?.page || 1,
+      page: queryTag?.page || 2,
     },
   })
 }

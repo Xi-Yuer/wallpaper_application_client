@@ -8,7 +8,14 @@ export default defineAppConfig({
   subPackages: [
     {
       root: 'subpages',
-      pages: ['album/index'],
+      pages: [
+        'album/index',
+        'album-detail/index',
+        'hot-recommends/index',
+        'category/index',
+        'tag-picture/index',
+        'search/index',
+      ],
     },
   ],
   tabBar: {

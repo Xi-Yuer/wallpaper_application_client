@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Image, View, Text } from '@tarojs/components'
 import Theme from '@/components/theme'
 import SearchBar from '@/components/search'
+import Taro from '@tarojs/taro'
 import Title from '@/components/title'
 import WSkeleton from '@/components/skeleton'
 import { getHotCateGory, getHotTag } from '@/service/apis/search'
@@ -21,6 +22,17 @@ const SearchPage = () => {
       setHotCateGory(res.data)
     })
   }, [])
+
+  const navToCategoryPage = (id: number) => {
+    Taro.navigateTo({
+      url: `/subpages/category/index?id=${id}`,
+    })
+  }
+  const navToTagPicturePage = (id: number, title: string) => {
+    Taro.navigateTo({
+      url: `/subpages/tag-picture/index?id=${id}&title=${title}`,
+    })
+  }
   return (
     <View className={styles.search_Wrapper}>
       <SearchBar />
@@ -29,7 +41,11 @@ const SearchPage = () => {
         {hotTag &&
           hotTag.map((_) => {
             return (
-              <View key={_.id} className={styles.scroll_item}>
+              <View
+                key={_.id}
+                className={styles.scroll_item}
+                onClick={() => navToTagPicturePage(_.id, _.tagName)}
+              >
                 <Image src={_.pic} mode='aspectFill'></Image>
                 <Text className={styles.tag_text}>{_.tagName}</Text>
               </View>
@@ -51,7 +67,11 @@ const SearchPage = () => {
         {hotCateGory &&
           hotCateGory.map((_) => {
             return (
-              <View key={_.id} className={styles.category_item}>
+              <View
+                key={_.id}
+                className={styles.category_item}
+                onClick={() => navToCategoryPage(_.id)}
+              >
                 <Image src={_.pic} mode='aspectFill'></Image>
                 <Text className={styles.category_text}>{_.name}</Text>
               </View>

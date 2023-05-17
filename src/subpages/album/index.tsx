@@ -1,6 +1,6 @@
 import { View, Text, Image } from '@tarojs/components'
 import { PullRefresh } from '@taroify/core'
-import { useReachBottom } from '@tarojs/taro'
+import Taro, { useReachBottom } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import { getAlbum, IAlbum } from '@/service/apis/home'
 import Theme from '@/components/theme/index'
@@ -50,6 +50,12 @@ const Album = () => {
         setHasMore(false)
       })
   })
+
+  const navToAlbumDetailPage = (id) => {
+    Taro.navigateTo({
+      url: `/subpages/album-detail/index?id=${id}`,
+    })
+  }
   return (
     <View className={styles.album_wrapper}>
       <SearchBar isBack />
@@ -61,7 +67,11 @@ const Album = () => {
         <View className={styles.album}>
           {album &&
             album.map((_) => (
-              <View key={_.id} className={styles.album_images}>
+              <View
+                key={_.id}
+                className={styles.album_images}
+                onClick={() => navToAlbumDetailPage(_.id)}
+              >
                 <Image src={_.pic} mode='aspectFill'></Image>
                 <Text className={styles.title}>{_.title}</Text>
               </View>

@@ -23,5 +23,6 @@ export function useSystem() {
     menuRight,
     menuTop,
     menuHeight,
+    customHeight: menuHeight + menuTop + menuHeight / 2,
   }
 }

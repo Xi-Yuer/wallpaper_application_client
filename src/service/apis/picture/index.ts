@@ -4,6 +4,7 @@ interface IQuery {
   category?: number
   tag?: number
   album?: number
+  limit?: number
   page?: number
 }
 
@@ -41,5 +42,16 @@ export const getPictrue = (query: IQuery) => {
   return request<IPicture[]>({
     url: '/pictures',
     data: query,
+  })
+}
+
+export const searchApi = (_: string, limit: number = 10, page: number = 1) => {
+  return request<IPicture[]>({
+    url: '/search',
+    data: {
+      searchKey: _,
+      limit,
+      page,
+    },
   })
 }

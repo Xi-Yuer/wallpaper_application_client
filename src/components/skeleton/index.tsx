@@ -21,6 +21,7 @@ const WSkeleton: FC<IProps> = memo(({ config }) => {
         display: 'grid',
         gridTemplateColumns: `repeat(${col}, 1fr)`,
         gap: gap,
+        boxSizing: 'border-box',
       }}
     >
       {new Array(col * row).fill(Math.floor(Math.random())).map((_) => {
