@@ -5,6 +5,7 @@ import SearchBar from '@/components/search'
 import Taro from '@tarojs/taro'
 import Title from '@/components/title'
 import WSkeleton from '@/components/skeleton'
+import BackTopBar from '@/components/back-top'
 import { getHotCateGory, getHotTag } from '@/service/apis/search'
 import { ITag } from '@/service/apis/home'
 import { Category } from '@/service/apis/picture'
@@ -88,6 +89,7 @@ const SearchPage = () => {
           }}
         />
       </View>
+      <BackTopBar />
     </View>
   )
 }

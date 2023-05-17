@@ -7,6 +7,7 @@ import Theme from '@/components/theme/index'
 import TagListPicture from '@/components/tag-list-picture/index'
 import SearchBar from '@/components/search/index'
 import WSkeleton from '@/components/skeleton'
+import BackTopBar from '@/components/back-top'
 
 import { useFetch } from './hooks/useFetch'
 
@@ -88,6 +89,7 @@ const HomePage = () => {
       </View>
       <Title title='热门推荐' morePagePath='/subpages/hot-recommends/index' />
       <TagListPicture tagList={tag} isSticky stickTop={customHeight} />
+      <BackTopBar />
     </View>
   )
 }

@@ -6,6 +6,7 @@ import { getAlbum, IAlbum } from '@/service/apis/home'
 import Theme from '@/components/theme/index'
 import SearchBar from '@/components/search'
 import WSkeleton from '@/components/skeleton'
+import BackTopBar from '@/components/back-top'
 
 import styles from './index.module.scss'
 
@@ -88,6 +89,7 @@ const Album = () => {
           />
         </View>
       </PullRefresh>
+      <BackTopBar />
     </View>
   )
 }

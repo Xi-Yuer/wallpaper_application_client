@@ -3,6 +3,7 @@ import { ITag } from '@/service/apis/home'
 import { PullRefresh, Sticky, Tabs } from '@taroify/core'
 import { View, Image, Block } from '@tarojs/components'
 import { FC } from 'react'
+import BackTopBar from '../back-top'
 import WSkeleton from '../skeleton'
 import { useFetch } from './hooks/useFetch'
 import styles from './index.module.scss'
@@ -80,6 +81,7 @@ const TagListPicture: FC<IProps> = ({
           />
         </View>
       </PullRefresh>
+      <BackTopBar />
     </Block>
   )
 }
