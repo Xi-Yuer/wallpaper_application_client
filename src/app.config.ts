@@ -15,6 +15,7 @@ export default defineAppConfig({
         'category/index',
         'tag-picture/index',
         'search/index',
+        'picture-detail/index',
       ],
     },
   ],

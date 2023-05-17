@@ -6,6 +6,7 @@ import { memo, useEffect, useState } from 'react'
 import { IPicture, searchApi } from '@/service/apis/picture'
 import { getTag, ITag } from '@/service/apis/home'
 import cache from '@/utils/cache'
+import { navToPictureDetailPage } from '@/hooks/navToPictureDetail'
 import styles from './index.module.scss'
 
 const SearchPage = memo(() => {
@@ -29,11 +30,13 @@ const SearchPage = memo(() => {
   useEffect(() => {
     getTag({
       limit: 10,
-      page: 2,
+      page: 1,
     }).then((res) => {
       setHotSearch(res.data)
     })
-    setHistorySearchKeys(cache.get('search_key') ? cache.get('search_key') : [])
+    setHistorySearchKeys(
+      cache.get('search_key') ? [...cache.get('search_key')] : [],
+    )
   }, [])
 
   const onClear = () => {
@@ -48,7 +51,7 @@ const SearchPage = memo(() => {
   const search = (_: string) => {
     setValue(_)
     const searchKeys = Array.from(new Set([...historySearchKeys, _]))
-    cache.set('search_key', _)
+    cache.set('search_key', searchKeys)
     setHistorySearchKeys(searchKeys)
     searchApi(_).then((res) => {
       setList(res.data)
@@ -112,7 +115,12 @@ const SearchPage = memo(() => {
         {list &&
           showList &&
           list.map((_) => (
-            <Image key={_.id} src={_.pic} mode='widthFix'></Image>
+            <Image
+              key={_.id}
+              src={_.pic}
+              mode='widthFix'
+              onClick={() => navToPictureDetailPage(_.id)}
+            ></Image>
           ))}
         {list.length === 0 && showList && (
           <View className={styles.center}>

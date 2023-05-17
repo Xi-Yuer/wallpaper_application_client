@@ -14,7 +14,7 @@ const HotRecommends = memo(() => {
     })
   }, [])
   return (
-    <View>
+    <View style={{ padding: '20rpx' }}>
       <TagListPicture tagList={data} isSticky stickTop={0} />
     </View>
   )

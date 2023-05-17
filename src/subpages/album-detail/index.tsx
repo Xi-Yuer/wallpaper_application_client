@@ -1,4 +1,5 @@
 import WSkeleton from '@/components/skeleton'
+import { navToPictureDetailPage } from '@/hooks/navToPictureDetail'
 import { getAlbumDetail, IAlbum } from '@/service/apis/album'
 import { formatTime } from '@/utils/format'
 import { View, Image, Text } from '@tarojs/components'
@@ -34,7 +35,12 @@ const AlbumDetail = memo(() => {
             </View>
             <View className={styles.pictures}>
               {detail.pictures.map((_) => (
-                <Image src={_.pic} key={_.id} mode='widthFix'></Image>
+                <Image
+                  src={_.pic}
+                  key={_.id}
+                  mode='widthFix'
+                  onClick={() => navToPictureDetailPage(_.id)}
+                ></Image>
               ))}
             </View>
           </View>

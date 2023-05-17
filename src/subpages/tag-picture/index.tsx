@@ -1,4 +1,5 @@
 import WSkeleton from '@/components/skeleton'
+import { navToPictureDetailPage } from '@/hooks/navToPictureDetail'
 import { getPictrue, IPicture } from '@/service/apis/picture'
 import { PullRefresh } from '@taroify/core'
 import { View, Image } from '@tarojs/components'
@@ -67,6 +68,7 @@ const TagPicture = memo(() => {
                 key={_.id}
                 className={styles.item_image}
                 mode='widthFix'
+                onClick={() => navToPictureDetailPage(_.id)}
               ></Image>
             ))}
           <WSkeleton

@@ -1,3 +1,4 @@
+import { navToPictureDetailPage } from '@/hooks/navToPictureDetail'
 import { ITag } from '@/service/apis/home'
 import { PullRefresh, Sticky, Tabs } from '@taroify/core'
 import { View, Image, Block } from '@tarojs/components'
@@ -60,7 +61,12 @@ const TagListPicture: FC<IProps> = ({
         <View className={styles.pictures}>
           {pictureList &&
             pictureList.map((_) => (
-              <Image src={_.pic} key={_.id} mode='widthFix'></Image>
+              <Image
+                src={_.pic}
+                key={_.id}
+                mode='widthFix'
+                onClick={() => navToPictureDetailPage(_.id)}
+              ></Image>
             ))}
           <WSkeleton
             config={{
