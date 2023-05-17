@@ -24,7 +24,9 @@ const AlbumDetail = memo(() => {
             <Text>{detail.title}</Text>
           </View>
           <View className={styles.content}>
-            <Text className={styles.description} userSelect>{detail.description}</Text>
+            <Text className={styles.description} userSelect>
+              {detail.description}
+            </Text>
             <View className={styles.user}>
               <View className='flex align-center'>
                 <Image src={detail.user.avatar}></Image>
