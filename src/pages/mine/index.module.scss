@@ -1,0 +1,52 @@
+.user {
+  background: linear-gradient(45deg, #fcd387, pink);
+  position: relative;
+  padding: 0 20rpx;
+  .avatar_wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 80rpx;
+  }
+  .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.479);
+    margin-right: 20rpx;
+    image {
+      width: 135rpx;
+      height: 135rpx;
+      border-radius: 50%;
+    }
+  }
+  .text {
+    font-size: 30rpx;
+    color: white;
+  }
+}
+.fnlist {
+  padding: 20rpx 30rpx;
+}
+.fnlist_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 100rpx;
+  color: rgb(85, 85, 85);
+  font-size: 30rpx;
+  .left {
+    text {
+      margin-left: 20rpx;
+      display: inline-block;
+    }
+  }
+}
+.line {
+  width: 100vw;
+  height: 15rpx;
+  background-color: rgb(238, 238, 238);
+}
