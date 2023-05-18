@@ -1,7 +1,8 @@
 import Taro from '@tarojs/taro'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 import { useSystem } from '@/hooks/useSystem'
-import { Button, Text, View } from '@tarojs/components'
-import { memo } from 'react'
+import { Button, Text, View, Image } from '@tarojs/components'
 import {
   Edit,
   Arrow,
@@ -17,7 +18,8 @@ import styles from './index.module.scss'
 
 const Home = () => {
   const { menuTop, menuHeight } = useSystem()
-
+  const { user } = useSelector<RootState, any>((state) => state.user)
+  console.log(user)
   const navToPage = (path: string) => {
     Taro.navigateTo({
       url: path,
@@ -73,15 +75,21 @@ const Home = () => {
       >
         <View className={styles.avatar_wrapper}>
           <View className={styles.avatar}>
-            {/* <Image
-              src='https://p.qqan.com/up/2018-4/2018041711105148417.jpg'
-              mode='aspectFill'
-            ></Image> */}
-            <Manager size='25' color='white' />
+            {user.id ? (
+              <Image src={user.avatar} mode='aspectFill'></Image>
+            ) : (
+              <Manager size='25' color='white' />
+            )}
           </View>
-          <Text className={styles.text} onClick={toLogin}>
-            注册/登录
-          </Text>
+          {user.id ? (
+            <Text className={styles.text} onClick={toLogin}>
+              {user.name}
+            </Text>
+          ) : (
+            <Text className={styles.text} onClick={toLogin}>
+              注册/登录
+            </Text>
+          )}
         </View>
       </View>
       <View className={styles.fnlist}>
@@ -153,4 +161,4 @@ const Home = () => {
   )
 }
 
-export default memo(Home)
+export default Home

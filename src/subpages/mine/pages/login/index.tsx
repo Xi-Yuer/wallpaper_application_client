@@ -1,8 +1,10 @@
 import Taro from '@tarojs/taro'
-import { BaseEventOrig, FormProps, Image, Text, View } from '@tarojs/components'
+import { useDispatch } from 'react-redux'
 import { memo, useState } from 'react'
+import { BaseEventOrig, FormProps, Image, Text, View } from '@tarojs/components'
 import { Button, Cell, Form, Input, Toast } from '@taroify/core'
 import { login, register } from '@/service/apis/user'
+import { changeUserInfo } from '@/store/user'
 import cache from '@/utils/cache'
 import Theme from '@/components/theme'
 import loginBg from '@/static/images/login.jpg'
@@ -10,10 +12,11 @@ import loginBg from '@/static/images/login.jpg'
 import styles from './index.module.scss'
 const Index = memo(() => {
   const [isLogin, setIsLogin] = useState(true)
+  const dispatch = useDispatch()
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
     const { username, password } = event.detail.value as any
     const fn = isLogin ? login : register
-    fn(username, password).then((res) => {
+    fn(username, password).then((res: any) => {
       if (res.statusCode === 200) {
         if (!isLogin) {
           Toast.open('注册成功，立即登录')
@@ -21,10 +24,10 @@ const Index = memo(() => {
           return
         }
         cache.set('USER_INFO', res.data)
+        cache.set('TOEKN', res.data.token)
+        dispatch(changeUserInfo(res.data))
         Toast.open(res.message)
-        Taro.switchTab({
-          url: '/pages/mine/index',
-        })
+        Taro.navigateBack()
       } else {
         Toast.open(res.message)
       }
