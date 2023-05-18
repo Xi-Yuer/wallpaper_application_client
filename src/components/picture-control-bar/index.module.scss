@@ -1,0 +1,35 @@
+.control {
+  transition: all 0.2s linear;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50rpx;
+  background-color: white;
+  box-shadow: 0 0 8rpx rgb(207, 207, 207);
+  width: 50%;
+  height: 90rpx;
+  .control_content {
+    transition: all 0.2s linear;
+    width: 100%;
+    padding: 0 40rpx;
+    box-sizing: border-box;
+    height: 90rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .control_content_item {
+      font-size: 35rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text {
+        display: inline;
+        margin-top: 5rpx;
+        font-size: 20rpx;
+      }
+    }
+  }
+}

@@ -55,3 +55,21 @@ export const searchApi = (_: string, limit: number = 10, page: number = 1) => {
     },
   })
 }
+export interface IPictureDetail {
+  id: number
+  title: string
+  description: string
+  pic: string
+  hot: number
+  createAt: Date
+  categories: Category[]
+  tags: Tag[]
+  user: User
+  recommend?: IPictureDetail[]
+}
+
+export const getPictureDetail = (id: number) => {
+  return request<IPictureDetail>({
+    url: `/pictures/${id}`,
+  })
+}
