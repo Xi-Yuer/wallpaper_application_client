@@ -16,6 +16,7 @@ export default defineAppConfig({
         'tag-picture/index',
         'search/index',
         'picture-detail/index',
+        'mine/pages/login/index',
         'mine/pages/detail/index',
         'mine/pages/download/index',
         'mine/pages/favor/index',

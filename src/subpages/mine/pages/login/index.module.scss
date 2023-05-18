@@ -1,0 +1,20 @@
+.wrapper {
+  .bg {
+    width: 100vw;
+    height: 250rpx;
+    overflow: hidden;
+    margin-bottom: 20rpx;
+    image {
+      width: 100vw;
+      height: 250rpx;
+    }
+  }
+  .tip {
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 25rpx;
+    color: rgb(0, 140, 255);
+  }
+}

@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
 import { useSystem } from '@/hooks/useSystem'
-import { Button, Image, Text, View } from '@tarojs/components'
+import { Button, Text, View } from '@tarojs/components'
 import { memo } from 'react'
 import {
   Edit,
@@ -10,6 +10,7 @@ import {
   Upgrade,
   WarningOutlined,
   MoreOutlined,
+  Manager,
 } from '@taroify/icons'
 
 import styles from './index.module.scss'
@@ -57,6 +58,12 @@ const Home = () => {
       path: '/subpages/mine/pages/about/index',
     },
   ]
+
+  const toLogin = () => {
+    Taro.navigateTo({
+      url: '/subpages/mine/pages/login/index',
+    })
+  }
   return (
     <View>
       {/* 背景 */}
@@ -66,12 +73,15 @@ const Home = () => {
       >
         <View className={styles.avatar_wrapper}>
           <View className={styles.avatar}>
-            <Image
+            {/* <Image
               src='https://p.qqan.com/up/2018-4/2018041711105148417.jpg'
               mode='aspectFill'
-            ></Image>
+            ></Image> */}
+            <Manager size='25' color='white' />
           </View>
-          <Text className={styles.text}>注册/登录</Text>
+          <Text className={styles.text} onClick={toLogin}>
+            注册/登录
+          </Text>
         </View>
       </View>
       <View className={styles.fnlist}>
