@@ -13,7 +13,6 @@ const Index = memo(() => {
   const { user } = useSelector<RootState, any>((state) => state.user)
   const dispatch = useDispatch()
   const changeUser = (res) => {
-    console.log(res.data)
     dispatch(changeUserInfo(res.data))
   }
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {

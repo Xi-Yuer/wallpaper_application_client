@@ -40,7 +40,6 @@ const Index = memo(() => {
   useReachBottom(() => {
     setPage(page + 1)
   })
-  console.log('pictureList', pictureList)
   return (
     <View className={styles.wrapper}>
       <PullRefresh loading={loading} onRefresh={onRefresh}>

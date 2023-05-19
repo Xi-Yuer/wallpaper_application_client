@@ -27,7 +27,6 @@ export const login = (username: string, password: string) => {
 
 export const updataUser = (userId: number, { username, password }) => {
   let info: any = {}
-  console.log('info')
   if (username) {
     info.username = username
   }
@@ -114,24 +113,34 @@ export const delFavor = (id: number) => {
 }
 
 export const download = (id: number) => {
+  Taro.showLoading()
   getPictureDetail(id).then((res: any) => {
     request({
       method: 'POST',
       url: `/download/${id}`,
-    }).then(async () => {
-      const { path } = await Taro.getImageInfo({ src: res.data.pic })
-      Taro.saveImageToPhotosAlbum({
-        filePath: path,
-        success() {
-          Taro.showToast({
-            title: '保存成功',
-          })
-        },
-        fail(err) {
-          console.log(err)
-        },
-      })
     })
-    console.log(res)
+      .then(async (result) => {
+        console.log(result)
+        if (result.statusCode === 401) {
+          Taro.showToast({
+            title: '请先登录哦',
+            icon: 'error',
+          })
+          return
+        }
+        Taro.hideLoading()
+        const { path } = await Taro.getImageInfo({ src: res.data.pic })
+        Taro.saveImageToPhotosAlbum({
+          filePath: path,
+          success() {
+            Taro.showToast({
+              title: '保存成功',
+            })
+          },
+        })
+      })
+      .finally(() => {
+        Taro.hideLoading()
+      })
   })
 }

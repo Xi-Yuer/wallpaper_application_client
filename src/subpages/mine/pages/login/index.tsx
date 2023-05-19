@@ -50,7 +50,7 @@ const Index = memo(() => {
             >
               <Form.Label>用户名</Form.Label>
               <Form.Control>
-                <Input placeholder='用户名' />
+                <Input placeholder='用户名' type='nickname' />
               </Form.Control>
             </Form.Item>
             <Form.Item

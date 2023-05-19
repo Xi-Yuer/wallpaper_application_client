@@ -27,6 +27,8 @@ export const request = <T>({
               title: res.data.message,
               icon: 'none',
             })
+            cache.remove('USER_INFO')
+            cache.remove('TOKEN')
           }
           resolve(res.data)
         })
