@@ -1,5 +1,6 @@
 import { View, Text } from '@tarojs/components'
 import Taro, { usePageScroll } from '@tarojs/taro'
+import { addFavor, download } from '@/service/apis/user'
 import { FC, memo, useState } from 'react'
 import { LabelOutlined, Down, ArrowDown } from '@taroify/icons'
 import styles from './index.module.scss'
@@ -7,7 +8,7 @@ import styles from './index.module.scss'
 interface IProps {
   id: number
 }
-const PictureControlBar: FC<IProps> = memo(() => {
+const PictureControlBar: FC<IProps> = memo(({ id }) => {
   const [showControlBar, setShowControlBar] = useState(true)
   const [opacity, setOpacity] = useState(100)
   usePageScroll((e) => {
@@ -31,11 +32,17 @@ const PictureControlBar: FC<IProps> = memo(() => {
         style={{ opacity: opacity, display: showControlBar ? 'block' : 'none' }}
       >
         <View className={styles.control_content}>
-          <View className={styles.control_content_item}>
+          <View
+            className={styles.control_content_item}
+            onClick={() => addFavor(id)}
+          >
             <LabelOutlined />
             <Text>收藏</Text>
           </View>
-          <View className={styles.control_content_item}>
+          <View
+            className={styles.control_content_item}
+            onClick={() => download(id)}
+          >
             <Down />
             <Text>下载</Text>
           </View>

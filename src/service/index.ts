@@ -8,23 +8,37 @@ export const request = <T>({
   method = 'GET',
   data,
 }: IConfig): Promise<IResponse<T>> => {
-  const token = cache.get('TOEKN') || ''
+  const token = cache.get('TOKEN') || ''
   return new Promise((resolve, reject) => {
-    Taro.request({
-      url: BASE_URL + url,
-      method,
-      data,
-      timeout: TIME_OUT,
-      header: {
-        'content-type': 'application/json',
-        Authorization: token,
-      },
-    })
-      .then((res) => {
-        resolve(res.data)
+    try {
+      Taro.request({
+        url: BASE_URL + url,
+        method,
+        data,
+        timeout: TIME_OUT,
+        header: {
+          'content-type': 'application/json',
+          Authorization: token,
+        },
       })
-      .catch((err) => {
-        reject(err)
+        .then((res) => {
+          if (res.statusCode === 401) {
+            Taro.showToast({
+              title: res.data.message,
+              icon: 'none',
+            })
+          }
+          resolve(res.data)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    } catch (err) {
+      Taro.showToast({
+        title: '请求错误，请稍后再试',
+        icon: 'none',
       })
+      reject(err)
+    }
   })
 }

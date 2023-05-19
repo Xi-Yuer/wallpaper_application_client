@@ -24,7 +24,7 @@ const Index = memo(() => {
           return
         }
         cache.set('USER_INFO', res.data)
-        cache.set('TOEKN', res.data.token)
+        cache.set('TOKEN', res.data.token)
         dispatch(changeUserInfo(res.data))
         Toast.open(res.message)
         Taro.navigateBack()

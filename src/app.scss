@@ -157,12 +157,38 @@
 }
 
 button {
-  -webkit-appearance: none;
-  background: transparent;
-  //   width: 50rpx;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 2.55555556;
+  border-radius: 5px;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  color: #000000;
+  background-color: transparent;
   &::after {
     border: none;
   }
+}
+
+.button {
+  width: 60%;
+  margin: 0 auto;
+  display: block;
+  color: #cdb03b;
+  background: transparent; /*设置背景颜色一致*/
+  border-color: transparent; /*设置边框颜色一致*/
+  /* background-color: rgba(255,255,255,0); */
+  outline: none;
+  border: none;
+}
+.button::after {
+  border: none; /*设置边框取消*/
 }
 
 ::-webkit-scrollbar {
@@ -170,4 +196,8 @@ button {
   width: 0;
   height: 0;
   color: transparent;
+}
+
+.taroify-button--default {
+  border: none !important;
 }

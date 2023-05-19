@@ -19,7 +19,6 @@ import styles from './index.module.scss'
 const Home = () => {
   const { menuTop, menuHeight } = useSystem()
   const { user } = useSelector<RootState, any>((state) => state.user)
-  console.log(user)
   const navToPage = (path: string) => {
     Taro.navigateTo({
       url: path,
@@ -52,7 +51,13 @@ const Home = () => {
       icon: <MoreOutlined />,
       name: '联系我们',
       path: '',
-      type: 'custom',
+      type: 'contact',
+    },
+    {
+      icon: <Edit />,
+      name: '建议反馈',
+      path: '',
+      type: 'feedback',
     },
     {
       icon: <WarningOutlined />,
@@ -83,7 +88,7 @@ const Home = () => {
           </View>
           {user.id ? (
             <Text className={styles.text} onClick={toLogin}>
-              {user.name}
+              {user.name || user.username}
             </Text>
           ) : (
             <Text className={styles.text} onClick={toLogin}>
@@ -115,12 +120,15 @@ const Home = () => {
           _.type ? (
             <Button
               key={_.path}
-              openType='contact'
+              className='contents'
+              openType={_.type as any}
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                margin: '0 -28rpx',
+                margin: '0 -30rpx',
+                fontSize: '35rpx',
+                boxSizing: 'border-box',
                 lineHeight: '100rpx',
               }}
             >
