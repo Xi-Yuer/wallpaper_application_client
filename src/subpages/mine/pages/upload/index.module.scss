@@ -1,0 +1,29 @@
+.wrapper {
+  padding: 0 20rpx;
+}
+.bg {
+  width: 100vw;
+  height: 250rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  image {
+    width: 100vw;
+    height: 250rpx;
+  }
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  image {
+    width: 350rpx;
+    border-radius: 10rpx;
+    margin-bottom: 20rpx;
+  }
+}
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

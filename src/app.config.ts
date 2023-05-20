@@ -22,6 +22,8 @@ export default defineAppConfig({
         'mine/pages/favor/index',
         'mine/pages/upload/index',
         'mine/pages/about/index',
+        'mine/pages/user-upload/index',
+        'mine/pages/copyright/index',
       ],
     },
   ],
