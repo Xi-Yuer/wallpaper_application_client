@@ -4,8 +4,8 @@ import {
   getAlbum,
   IBanner,
   IAlbum,
-  getTag,
   ITag,
+  getHotTag,
 } from '@/service/apis/home/index'
 export const useFetch = () => {
   const [banner, setBanner] = useState<IBanner[]>([])
@@ -17,7 +17,7 @@ export const useFetch = () => {
     Promise.all([
       getBanner(),
       getAlbum({ limit: 2, page: 1 }),
-      getTag({ limit: 10, page: 1 }),
+      getHotTag({ limit: 10, page: 1 }),
     ]).then(([bannerResult, albumResult, tagResult]) => {
       setBanner(bannerResult.data)
       setAlnum(albumResult.data)

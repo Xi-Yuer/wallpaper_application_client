@@ -13,13 +13,22 @@ import {
   MoreOutlined,
   Manager,
 } from '@taroify/icons'
+import cache from '@/utils/cache'
 
 import styles from './index.module.scss'
 
 const Home = () => {
   const { menuTop, menuHeight } = useSystem()
   const { user } = useSelector<RootState, any>((state) => state.user)
-  const navToPage = (path: string) => {
+  const token = cache.get('TOKEN') || ''
+  const navToPage = (path: string, permission: boolean) => {
+    if (!token && permission) {
+      Taro.showToast({
+        title: '请先登录',
+        icon: 'none',
+      })
+      return
+    }
     Taro.navigateTo({
       url: path,
     })
@@ -29,21 +38,25 @@ const Home = () => {
       icon: <Edit />,
       name: '完善资料',
       path: '/subpages/mine/pages/detail/index',
+      permission: true,
     },
     {
       icon: <StarOutlined />,
       name: '我的收藏',
       path: '/subpages/mine/pages/favor/index',
+      permission: true,
     },
     {
       icon: <Down />,
       name: '我的下载',
       path: '/subpages/mine/pages/download/index',
+      permission: true,
     },
     {
       icon: <Upgrade />,
       name: '上传壁纸',
       path: '/subpages/mine/pages/upload/index',
+      permission: true,
     },
   ]
   const moreList = [
@@ -52,17 +65,20 @@ const Home = () => {
       name: '联系我们',
       path: '',
       type: 'contact',
+      permission: false,
     },
     {
       icon: <Edit />,
       name: '建议反馈',
       path: '',
       type: 'feedback',
+      permission: false,
     },
     {
       icon: <WarningOutlined />,
       name: '关于我们',
       path: '/subpages/mine/pages/about/index',
+      permission: false,
     },
   ]
 
@@ -102,7 +118,7 @@ const Home = () => {
           <View
             className={styles.fnlist_item}
             key={_.name}
-            onClick={() => navToPage(_.path)}
+            onClick={() => navToPage(_.path, _.permission)}
           >
             <View className={styles.left}>
               {_.icon}
@@ -152,7 +168,7 @@ const Home = () => {
             <View
               className={styles.fnlist_item}
               key={_.name}
-              onClick={() => navToPage(_.path)}
+              onClick={() => navToPage(_.path, _.permission)}
             >
               <View className={styles.left}>
                 {_.icon}

@@ -15,15 +15,11 @@ const Index = memo(() => {
   const [value, setValue] = useState(0)
   const [imagePath, setImagePath] = useState('')
   const [category, setCategory] = useState<(ICategory & Tag)[]>([])
-
-  console.log(tabValue)
-  console.log(value)
   const pickImage = () => {
     Taro.chooseImage({
       count: 1,
       sizeType: ['original'],
       success(res) {
-        console.log(res)
         setImagePath(res.tempFilePaths[0])
       },
     })
@@ -37,12 +33,16 @@ const Index = memo(() => {
       })
       return
     }
-    Taro.showLoading()
+    Taro.showLoading({
+      title: '正在上传中',
+    })
     uploadPicture(imagePath, tabValue, value)
       .then(() => {
         Taro.showToast({
           title: '上传成功',
           icon: 'success',
+        }).then(() => {
+          Taro.navigateBack()
         })
       })
       .finally(() => {

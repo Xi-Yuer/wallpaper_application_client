@@ -1,4 +1,4 @@
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { Image, View, Text } from '@tarojs/components'
 import { memo, useEffect, useState } from 'react'
 import Theme from '@/components/theme'
@@ -26,6 +26,11 @@ const Index = memo(() => {
       setList(res.data)
     })
   }, [value])
+  useDidShow(() => {
+    getUserUpload(user.id, value).then((res) => {
+      setList(res.data)
+    })
+  })
   return (
     <View className={styles.wrapper}>
       <View className={styles.bg}>
@@ -57,7 +62,7 @@ const Index = memo(() => {
           bottom: '50rpx',
           width: '120rpx',
           height: '120rpx',
-          background: '#00c853',
+          background: '#ffe048',
           borderRadius: '50%',
           display: 'flex',
           flexWrap: 'wrap',

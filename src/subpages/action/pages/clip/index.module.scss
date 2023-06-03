@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  image {
+    width: 600rpx;
+    height: 600rpx;
+  }
+}
+#myCanvas {
+  width: 100vw;
+  height: 600rpx;
+}

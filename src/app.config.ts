@@ -24,6 +24,7 @@ export default defineAppConfig({
         'mine/pages/about/index',
         'mine/pages/user-upload/index',
         'mine/pages/copyright/index',
+        'action/pages/clip/index',
       ],
     },
   ],
@@ -43,12 +44,12 @@ export default defineAppConfig({
         selectedIconPath: './static/images/search.png',
         text: '搜索',
       },
-      {
-        pagePath: 'pages/action/index',
-        iconPath: './static/images/action-gray.png',
-        selectedIconPath: './static/images/action.png',
-        text: '发现',
-      },
+    //   {
+    //     pagePath: 'pages/action/index',
+    //     iconPath: './static/images/action-gray.png',
+    //     selectedIconPath: './static/images/action.png',
+    //     text: '发现',
+    //   },
       {
         pagePath: 'pages/mine/index',
         iconPath: './static/images/mine-gray.png',

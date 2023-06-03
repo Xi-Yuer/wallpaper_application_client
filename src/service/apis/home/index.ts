@@ -48,3 +48,10 @@ export const getTag = (query?: IQuery) => {
     data: query,
   })
 }
+
+export const getHotTag = (query?: IQuery) => {
+  return request<ITag[]>({
+    url: '/tags/hot',
+    data: query,
+  })
+}
